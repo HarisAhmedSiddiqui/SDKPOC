@@ -35,12 +35,15 @@ To generate the iOS framework, you need to use the link tasks for each iOS targe
 
 ## For the simulator (X64 or ARM64):
 ./gradlew linkReleaseFrameworkIosX64
+
 ./gradlew linkReleaseFrameworkIosSimulatorArm64
  
 Output Location: After running the above commands, you should find the generated framework files under the following paths:
 
 build/bin/iosArm64/releaseFramework/
+
 build/bin/iosX64/releaseFramework/
+
 build/bin/iosSimulatorArm64/releaseFramework/
 
 
