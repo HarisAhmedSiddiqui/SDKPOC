@@ -29,11 +29,18 @@ Note: The iOS framework can only be generated on a Mac.
 
 Open the project in a terminal on your Mac.
 
-### Run the following command to build the iOS framework: ./gradlew assemble
-The generated .framework file will be located in one of the following directories, depending on the architecture you are targeting:
+To generate the iOS framework, you need to use the link tasks for each iOS target, like so
+## For a device (ARM64):
+./gradlew linkReleaseFrameworkIosArm64
 
-build/bin/iosX64/releaseFramework/
+## For the simulator (X64 or ARM64):
+./gradlew linkReleaseFrameworkIosX64
+./gradlew linkReleaseFrameworkIosSimulatorArm64
+ 
+Output Location: After running the above commands, you should find the generated framework files under the following paths:
+
 build/bin/iosArm64/releaseFramework/
+build/bin/iosX64/releaseFramework/
 build/bin/iosSimulatorArm64/releaseFramework/
 
 
