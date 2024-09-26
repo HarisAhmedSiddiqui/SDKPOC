@@ -1,20 +1,24 @@
 plugins {
-    kotlin("multiplatform") // No version specified, since it's already on the classpath
+    kotlin("multiplatform") version "1.9.0" // Specify Kotlin version
     id("com.android.library")
 }
 
 kotlin {
-    androidTarget() // Use androidTarget() instead of android()
+    androidTarget() // Use androidTarget() for Android
 
-    // Define iOS targets with unique names
-    iosX64("iosX64") // iOS simulator for X64
-    iosArm64("iosArm64") // iOS device for ARM64
-    iosSimulatorArm64("iosSimulatorArm64") // iOS simulator for ARM64
+    // Use the ios() DSL which covers all iOS targets
+    ios {
+        binaries {
+            framework {
+                baseName = "PocSDKCalculator"
+            }
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                // Shared dependencies
+                // Shared dependencies for Android and iOS
             }
         }
         val androidMain by getting {
@@ -22,33 +26,21 @@ kotlin {
                 // Android-specific dependencies
             }
         }
-        val iosX64Main by getting {
+        val iosMain by getting {
             dependencies {
-                // iOS X64-specific dependencies if any
+                // iOS-specific dependencies
             }
         }
-        val iosArm64Main by getting {
-            dependencies {
-                // iOS ARM64-specific dependencies if any
-            }
-        }
-        val iosSimulatorArm64Main by getting {
-            dependencies {
-                // iOS Simulator ARM64-specific dependencies if any
-            }
-        }
+
+        // Tests
         val commonTest by getting
         val androidUnitTest by getting
-        val androidInstrumentedTest by getting
-
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
+        val iosTest by getting
     }
 }
 
 android {
-    namespace = "com.poc.calculator" // Make sure to replace with your own package
+    namespace = "com.poc.calculator" // Replace with your package name
 
     compileSdk = 33
     defaultConfig {
@@ -62,9 +54,8 @@ android {
     }
 }
 
-// Set the Kotlin options for the Android compilation tasks
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "1.8" // or "17"
+        jvmTarget = "1.8"
     }
 }
