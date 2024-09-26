@@ -1,12 +1,11 @@
 plugins {
-    kotlin("multiplatform") version "1.9.0" // Specify Kotlin version
+    kotlin("multiplatform") // No version needed, it's already on the classpath
     id("com.android.library")
 }
 
 kotlin {
-    androidTarget() // Use androidTarget() for Android
+    androidTarget()
 
-    // Use the ios() DSL which covers all iOS targets
     ios {
         binaries {
             framework {
